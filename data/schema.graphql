@@ -1,0 +1,58 @@
+type Cliente {
+    id: ID
+    nombre: String
+    apellido: String
+    empresa: String
+    emails: [Email]
+    edad: Int
+    tipo: TipoCliente
+    pedidos: [Pedido]
+}
+""" Asigna el Email del Cliente """
+type Email {
+    email: String
+}
+""" Asigna el Pedido del Cliente """
+type Pedido {
+    producto: String
+    precio: Int
+}
+""" Asigna la Categoria del Cliente """
+enum TipoCliente {
+    BASICO
+    PREMIUM
+}
+type Query {
+    """ Te permite buscar a todos los Clientes """
+    getClientes(limite: Int) : [Cliente]
+    """ Te permite buscar a un Clientes """
+    getCliente(id: ID) : Cliente
+}
+input EmailInput {
+    email: String
+}
+input PerdidoInput {
+    producto: String
+    precio: Int
+}
+""" Campos para los Clientes Nuevos """
+input ClienteInput {
+    id: ID
+    nombre: String!
+    apellido: String!
+    empresa: String!
+    emails: [EmailInput]
+    edad: Int!
+    tipo: TipoCliente!
+    pedidos: [PerdidoInput]
+}
+""" Mutations para crear nuevos clientes """
+type Mutation {
+    # nombre del resolver , Input con Datos y valor que retorna
+    """ Te permite crear nuevos Clientes """ 
+    crearCliente(input: ClienteInput) : Cliente
+    """ Te permite Actualizar Clientes """
+    actualizarCliente(input: ClienteInput) : Cliente
+    """ Te permite Eliminar Clientes """
+    eliminarCliente(id: ID!) : String
+}
