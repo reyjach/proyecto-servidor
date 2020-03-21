@@ -24,9 +24,11 @@ enum TipoCliente {
 }
 type Query {
     """ Te permite buscar a todos los Clientes """
-    getClientes(limite: Int) : [Cliente]
+    getClientes(limite: Int, offset: Int) : [Cliente]
     """ Te permite buscar a un Clientes """
     getCliente(id: ID) : Cliente
+    """ Te perimite buscar la cantidad de clientes """
+    totalClientes: String
 }
 input EmailInput {
     email: String
