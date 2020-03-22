@@ -8,7 +8,8 @@ mongoose.set('useFindAndModify', false);
 
 mongoose.set('useUnifiedTopology', true);
 
-//DEFINIR CHEMA DE CLIENTES
+
+//DEFINIR SCHEMA DE CLIENTES
 
 const clienteSchema = new mongoose.Schema({
     nombre: String,
@@ -22,5 +23,15 @@ const clienteSchema = new mongoose.Schema({
 
 const Clientes = mongoose.model('clientes', clienteSchema);
 
-export { Clientes }
+//PRODUCTOS
+
+const productosSchema = new mongoose.Schema({
+    nombre: String,
+    precio: Number,
+    stock: Number
+})
+
+const Productos = mongoose.model('productos',productosSchema)
+
+export { Clientes, Productos }
 
