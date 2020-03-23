@@ -22,6 +22,14 @@ enum TipoCliente {
     BASICO
     PREMIUM
 }
+
+type Producto {
+    id:ID
+    nombre: String!
+    precio: Int!
+    stock: Int!
+}
+
 type Query {
     """ Te permite buscar a todos los Clientes """
     getClientes(limite: Int, offset: Int) : [Cliente]
@@ -29,12 +37,11 @@ type Query {
     getCliente(id: ID) : Cliente
     """ Te perimite buscar la cantidad de clientes """
     totalClientes: String
-}
-type Producto {
-    id:ID
-    nombre: String!
-    precio: Int!
-    stock: Int!
+    # Productos
+    """ Te permite buscar todos los Productos  """
+    obtenerProductos(limite: Int, offset: Int) : [Producto]
+    """ Te permite buscar a un Producto """
+    obtenerProducto(id: ID!) : Producto
 }
 input EmailInput {
     email: String
@@ -73,4 +80,8 @@ type Mutation {
     #productos
     """ Te permite crear un nuevo Producto """
     nuevoProducto(input: ProductoInput) : Producto
+    """ Te perimite Actualizar Producto """
+    actualizarProducto(input: ProductoInput) : Producto
+    """ Te perimite Eliminar Producto """
+    eliminarProducto(id: ID!) : String
 }
