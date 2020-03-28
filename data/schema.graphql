@@ -42,6 +42,8 @@ type Query {
     obtenerProductos(limite: Int, offset: Int) : [Producto]
     """ Te permite buscar a un Producto """
     obtenerProducto(id: ID!) : Producto
+    """ Te perimite buscar la cantidad de Producto """
+    totalProductos: String
 }
 input EmailInput {
     email: String
