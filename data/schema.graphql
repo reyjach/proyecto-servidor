@@ -59,6 +59,9 @@ type Query {
     obtenerProducto(id: ID!) : Producto
     """ Te perimite buscar la cantidad de Producto """
     totalProductos: String
+    # Pedidos
+    """ Te permite buscar un perdido del cliente """
+    obtenerPedidos(cliente: String) : [Pedido]
 }
 input EmailInput {
     email: String

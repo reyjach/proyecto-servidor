@@ -47,6 +47,14 @@ export const resolvers = {
                 })
             })
         },
+        obtenerPedidos: (root, {cliente}) => {
+            return new Promise((resolve,object) => {
+                Pedidos.find({ cliente: cliente}, (error, pedido) => {
+                    if(error) rejects(error)
+                    else resolve(pedido)
+                })
+            })
+        }
     },
     Mutation: {
         crearCliente : (root, {input}) => {
