@@ -60,7 +60,7 @@ type Query {
     """ Te perimite buscar la cantidad de Producto """
     totalProductos: String
     # Pedidos
-    """ Te permite buscar un perdido del cliente """
+    """ Te permite buscar un perdido del Cliente """
     obtenerPedidos(cliente: String) : [Pedido]
 }
 input EmailInput {
@@ -117,4 +117,6 @@ type Mutation {
     #pedidos
     """ Te permite crear un nuevo Pedido """
     nuevoPedido(input: PedidoInput): Pedido
+    """ Te permite actualizar un Producto """
+    actualizarEstado(input: PedidoInput): String
 }
