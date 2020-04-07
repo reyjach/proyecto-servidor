@@ -45,6 +45,11 @@ type PedidoProducto {
     cantidad: Int
 }
 
+type ClienteTotal {
+    total: Float
+    cliente: [Cliente]
+}
+
 type Query {
     """ Te permite buscar a todos los Clientes """
     getClientes(limite: Int, offset: Int) : [Cliente]
@@ -61,7 +66,10 @@ type Query {
     totalProductos: String
     # Pedidos
     """ Te permite buscar un perdido del Cliente """
-    obtenerPedidos(cliente: String) : [Pedido]
+    obtenerPedidos(cliente: ID) : [Pedido]
+    #Graficas
+    """ Te permite realizar un filtro de pedidos """
+    topClientes : [ClienteTotal]
 }
 input EmailInput {
     email: String
