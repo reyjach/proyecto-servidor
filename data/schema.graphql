@@ -127,4 +127,7 @@ type Mutation {
     nuevoPedido(input: PedidoInput): Pedido
     """ Te permite actualizar un Producto """
     actualizarEstado(input: PedidoInput): String
+    #usuarios
+    """ Te permite crear un Usuario """
+    crearUsuario(usuario: String!, password: String!): String
 }

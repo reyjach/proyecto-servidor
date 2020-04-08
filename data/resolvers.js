@@ -1,4 +1,4 @@
-import { Clientes, Productos, Pedidos } from './db';
+import { Clientes, Productos, Pedidos, Usuarios } from './db';
 import { rejects } from 'assert';
 
 
@@ -216,7 +216,21 @@ export const resolvers = {
                     else resolvers('Se actualizo correctamente')
                 })
             })
+        },
+        crearUsuario: async (root, {usuario, password}) => {
+            //revisar si un usuario contiene este password
+            const existeUsuario = await Usuarios.findOne({usuario });
+            if(existeUsuario){
+                throw new Error('El usuario ya existe');
+            }
+            const nuevoUsuario = await new Usuarios({
+                usuario,
+                password
+            }).save();
+           
+            return "Creado Correctamente"
         }
+
     }
 }
 
