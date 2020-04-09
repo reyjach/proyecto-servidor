@@ -50,6 +50,10 @@ type ClienteTotal {
     cliente: [Cliente]
 }
 
+type Token {
+    token : String!
+}
+
 type Query {
     """ Te permite buscar a todos los Clientes """
     getClientes(limite: Int, offset: Int) : [Cliente]
@@ -130,4 +134,6 @@ type Mutation {
     #usuarios
     """ Te permite crear un Usuario """
     crearUsuario(usuario: String!, password: String!): String
+    """ Te perimite valida Usuario y Password """
+    autenticarUsuario(usuario: String!, password: String!): Token
 }
