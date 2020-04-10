@@ -102,6 +102,16 @@ export const resolvers = {
                     else resolve(resultado)
                 })
             })
+        },
+        obtenerUsuario: (root, args, {usuarioActual}) => {
+            if(!usuarioActual){
+                return null;
+            }
+            console.log(usuarioActual);
+            //obtener usuario actual del request JWT verificado
+            const usuario = Usuarios.findOne({usuario: usuarioActual.usuario});
+
+            return usuario;
         }
     },
     Mutation: {
