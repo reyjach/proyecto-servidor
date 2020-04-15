@@ -1,11 +1,15 @@
 import { Clientes, Productos, Pedidos, Usuarios } from './db';
 import { rejects } from 'assert';
-
+import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
+
+const ObjectId = mongoose.Types.ObjectId;
 
 // generar token
 
 import dotenv from 'dotenv';
+
+
 
 dotenv.config({path: 'variables.env'});
 
@@ -19,8 +23,12 @@ const crearToken = (usuarioLogin, secreto, expiresIn) => {
 
 export const resolvers = {
     Query: {
-        getClientes : (root, {limite,offset}) => {
-            return Clientes.find({}).limit(limite).skip(offset)
+        getClientes : (root, {limite, offset, vendedor}) => {
+            let filtro;
+            if(vendedor){
+                filtro = { vendedor : new ObjectId(vendedor)}
+            }
+            return Clientes.find(filtro).limit(limite).skip(offset)
         },
         getCliente : (root, {id}) => {
             return new Promise((resolvers, object) => {
@@ -107,7 +115,7 @@ export const resolvers = {
             if(!usuarioActual){
                 return null;
             }
-            console.log(usuarioActual);
+            
             //obtener usuario actual del request JWT verificado
             const usuario = Usuarios.findOne({usuario: usuarioActual.usuario});
 
@@ -124,7 +132,8 @@ export const resolvers = {
                 emails: input.emails,
                 edad: input.edad,
                 tipo: input.tipo,
-                pedidos: input.pedidos
+                pedidos: input.pedidos,
+                vendedor: input.vendedor
             });
 
             nuevoCliente.id = nuevoCliente._id;
@@ -241,7 +250,7 @@ export const resolvers = {
                 })
             })
         },
-        crearUsuario: async (root, {usuario, password}) => {
+        crearUsuario: async (root, {usuario, nombre, password, rol}) => {
             //revisar si un usuario contiene este password
             const existeUsuario = await Usuarios.findOne({usuario});
             if(existeUsuario){
@@ -249,7 +258,9 @@ export const resolvers = {
             }
             const nuevoUsuario = await new Usuarios({
                 usuario,
-                password
+                nombre,
+                password,
+                rol
             }).save();
            
             return "Creado Correctamente"

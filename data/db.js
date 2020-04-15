@@ -19,7 +19,8 @@ const clienteSchema = new mongoose.Schema({
     emails: Array,
     edad: Number,
     tipo: String,
-    pedidos: Array
+    pedidos: Array,
+    vendedor: mongoose.Types.ObjectId
 });
 
 const Clientes = mongoose.model('clientes', clienteSchema);
@@ -50,7 +51,9 @@ const Pedidos = mongoose.model('pedidos', pedidosSchema);
 
 const UsuariosSchema = new mongoose.Schema({
     usuario: String,
-    password: String
+    nombre: String,
+    password: String,
+    rol: String
 });
 
 //Hashear los password antes de guardarlos en la base de datos
