@@ -18,7 +18,7 @@
     "graphql-import": "^0.7.1",
     "graphql-tools": "^4.0.7",
     "jsonwebtoken": "^8.5.1",
-    "minimist": "^1.2.5",
+    "minimist": "^1.2.6",
     "mongoose": "^5.9.5",
     "nodemon": "^2.0.2"
   },
